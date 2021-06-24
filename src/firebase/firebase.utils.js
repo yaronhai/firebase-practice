@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-//import 'firebase/auth';
+import 'firebase/auth';
 
 const config = {
     apiKey: "AIzaSyDzebfRUDdlG4xNL4hzyd7rFi0MjtwPS64",
@@ -12,7 +12,10 @@ const config = {
   };
   // Initialize Firebase
 firebase.initializeApp(config);
+firebase.auth();
 export const db = firebase.firestore();
+export const usersCollection = db.collection('users');
+
 // db.collection('users').get().then(snapshot => {
 //     snapshot.forEach(doc =>{
 //         console.log(doc.id, doc.data());
