@@ -8,25 +8,23 @@ class Users extends React.Component {
         super();
 
         this.state = {
-            users: null
+            users: []
         }
     }
     
 
     componentDidMount() {
         db.collection('users').get().then( snapshot => {
-            snapshot.forEach(doc => {
-                const users = convertSnapshotToArray(snapshot);
-                this.setState({
-                    users
-                })
+            const users = convertSnapshotToArray(snapshot);
+            this.setState({
+                users
             })
         }).catch(e => console.log('didMountError: ',e));
     }
 
     handleUsersData = (users) => (
         users.map((user) => (
-            <p>{user.name} </p>
+            <p key={user.id}>{user.email} </p>
         ))
     )
 
@@ -36,7 +34,7 @@ class Users extends React.Component {
         console.log('users: ', users);
         return(
             <div>
-                <h2>...</h2>
+                {this.handleUsersData(users)}   
             </div>
             
         )

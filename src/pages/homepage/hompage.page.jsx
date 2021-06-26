@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class Homepage extends React.Component {
 
@@ -6,7 +7,10 @@ class Homepage extends React.Component {
 
         return(
             <div>
-                yaron
+                <h1><Link to='/'> Homepage </Link></h1>
+                <p><Link to='/login'> Login </Link></p>
+                <p><Link to='/users'> Users </Link></p>
+                
             </div>
 
         )

@@ -1,6 +1,7 @@
 import React from 'react';
 import './loginAndRegister.scss';
 import firebase , { usersCollection } from '../../firebase/firebase.utils.js';
+import {Link} from 'react-router-dom';
 
 class LoginAndRegister extends React.Component{
 
@@ -20,7 +21,7 @@ class LoginAndRegister extends React.Component{
                 ...prevState.user,
                 [name]:value
             }
-        }))
+        }),console.log(this.state))
     }
 
     handleLogin = (e) => {
@@ -30,10 +31,13 @@ class LoginAndRegister extends React.Component{
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(user => {
-            
+            if (user) {
+                console.log('user signed in: ', user)
+            }
+            else {
+                console.log('user is not signed in...')
+            }  
         }).catch(e => alert(e))
-
-
 
         console.log(this.state)
     }
@@ -52,11 +56,9 @@ class LoginAndRegister extends React.Component{
         //     .catch(e => console.log(e))
         })
         .catch(e => alert(e));
-
-
-
         console.log(this.state)
     }
+
     handleStoreRegisterUser = (data) => {
         usersCollection.doc(data.user.uid).set({
             email: data.user.email,
@@ -65,10 +67,16 @@ class LoginAndRegister extends React.Component{
         .catch( e => console.log(e))
     }
     handleLogout = () => {
+        if (firebase.auth.currUser) {
+            console.log('Logging out user: ', this.state.user)
+        } else {
+            console.log('no user to log out');
+            return;
+        }
         firebase
         .auth()
         .signOut()
-        .then(() => console.log('User logged out'))
+        .then(() => console.log('User logged out: ', this.state.user))
         .catch(e => console.log(e))
     }
 
@@ -96,6 +104,7 @@ class LoginAndRegister extends React.Component{
     render(){
         return(
             <div>
+                <h1><Link to='/'> Homepage </Link></h1>
                 <form onSubmit={e => this.handleLogin(e)}>
                     <div className='form-group'>
                         <label> Email </label>
