@@ -5,9 +5,9 @@ class Upload extends React.Component{
     constructor(props) {
         super(props);
 
-        const pauseRef = React.createRef();
-        const resumeRef = React.createRef();
-        const cancelRef = React.createRef();
+        this.pauseRef = React.createRef();
+        this.resumeRef = React.createRef();
+        this.cancelRef = React.createRef();
 
         this.state = {
             image:null,
