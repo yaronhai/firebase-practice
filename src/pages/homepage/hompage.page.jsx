@@ -10,6 +10,7 @@ class Homepage extends React.Component {
                 <h1><Link to='/'> Homepage </Link></h1>
                 <p><Link to='/login'> Login </Link></p>
                 <p><Link to='/users'> Users </Link></p>
+                <p><Link to='/upload'> Upload </Link></p>
                 
             </div>
 
