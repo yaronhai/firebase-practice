@@ -2,12 +2,21 @@ import React from 'react';
 import { storageRef } from '../../firebase/firebase.utils';
 
 class Upload extends React.Component{
+    constructor(props) {
+        super(props);
 
-    state = {
-        image:null,
-        url:'',
-        progress:0
+        const pauseRef = React.createRef();
+        const resumeRef = React.createRef();
+        const cancelRef = React.createRef();
+
+        this.state = {
+            image:null,
+            url:'',
+            progress:0
+        }
     }
+
+    
 
     render(){
         return(
@@ -32,6 +41,13 @@ class Upload extends React.Component{
                 >
                     Upload file
                 </button>
+                <hr/>
+
+                <div className='form-group'>
+                    <button className='btn btn-primary' ref={this.pauseRef}>PAUSE</button>
+                    <button className='btn btn-primary' ref={this.resumeRef}>RESUME</button>
+                    <button className='btn btn-primary' ref={this.cancelRef}>CANCEL</button>
+                </div>
 
             </div>
         )
@@ -65,9 +81,22 @@ class Upload extends React.Component{
                         console.log(snapshot.state);
                 }
             },
-            (error)=>{console.log(error)},
+            (error)=>{
+                console.log(error);
+                this.setState({progress:0})
+            },
             ()=>{console.log('upload completed')}
         );
+
+        this.pauseRef.current.addEventListener('click', ()=>{
+            uploadTask.pause();
+        })
+        this.resumeRef.current.addEventListener('click',()=>{
+            uploadTask.resume();
+        })
+        this.cancelRef.current.addEventListener('click',()=>{
+            uploadTask.cancel();
+        })
     }
 
     handleChange = (event) => {
