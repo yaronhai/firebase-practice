@@ -1,5 +1,6 @@
 import React from 'react';
 import { storageRef } from '../../firebase/firebase.utils';
+import './upload.styles.scss';
 
 class Upload extends React.Component{
     constructor(props) {
@@ -16,8 +17,6 @@ class Upload extends React.Component{
         }
     }
 
-    
-
     render(){
         return(
             <div>
@@ -31,7 +30,6 @@ class Upload extends React.Component{
                             onChange={ this.handleChange}
                         />
                     </div>
-
                 </form>
 
                 <button
@@ -43,7 +41,7 @@ class Upload extends React.Component{
                 </button>
                 <hr/>
 
-                <div className='form-group'>
+                <div className='btn-group'>
                     <button className='btn btn-primary' ref={this.pauseRef}>PAUSE</button>
                     <button className='btn btn-primary' ref={this.resumeRef}>RESUME</button>
                     <button className='btn btn-primary' ref={this.cancelRef}>CANCEL</button>

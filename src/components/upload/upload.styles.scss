@@ -1,0 +1,16 @@
+.btn{
+    margin:10px;
+    padding:10px;
+    background-color: gray;
+    &:hover {
+        background-color: lightgray;
+    }
+
+}
+
+.btn-group{
+    display: flex;
+    flex-direction: row;
+    background-color: darkkhaki;
+    width:max-content;
+}
