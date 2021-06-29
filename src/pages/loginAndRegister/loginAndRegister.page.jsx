@@ -21,7 +21,7 @@ class LoginAndRegister extends React.Component{
                 ...prevState.user,
                 [name]:value
             }
-        }),console.log(this.state))
+        }))
     }
 
     handleLogin = (e) => {
@@ -61,14 +61,16 @@ class LoginAndRegister extends React.Component{
 
     handleStoreRegisterUser = (data) => {
         usersCollection.doc(data.user.uid).set({
-            email: data.user.email,
+            displayName: data.user.displayName,
+            email: data.user.email
         })
         .then( (data) => console.log(data) )
         .catch( e => console.log(e))
     }
     handleLogout = () => {
-        if (firebase.auth.currUser) {
-            console.log('Logging out user: ', this.state.user)
+        const currUser = firebase.auth().currentUser;
+        if (currUser) {
+            console.log('Logging out user: ', currUser)
         } else {
             console.log('no user to log out');
             return;
